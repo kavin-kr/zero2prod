@@ -24,7 +24,9 @@ pub struct DatabaseSettings {
 pub fn get_configuration() -> Result<Settings, config::ConfigError> {
     let mut settings = config::Config::default();
 
-    let config_directory = std::env::current_dir().expect("Failed to determine current directory").join("configuration");
+    let config_directory = std::env::current_dir()
+        .expect("Failed to determine current directory")
+        .join("configuration");
 
     settings.merge(config::File::from(config_directory.join("base")).required(true))?;
 
@@ -33,7 +35,8 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
         .try_into()
         .expect("Failed to parse APP_ENVIRONMENT.");
 
-    settings.merge(config::File::from(config_directory.join(environment.as_str())).required(true))?;
+    settings
+        .merge(config::File::from(config_directory.join(environment.as_str())).required(true))?;
 
     settings.merge(config::Environment::with_prefix("app").separator("__"))?;
 
