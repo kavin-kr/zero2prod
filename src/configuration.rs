@@ -1,20 +1,20 @@
 use crate::domain::SubscriberEmail;
 use std::convert::{TryFrom, TryInto};
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct Settings {
     pub database: DatabaseSettings,
     pub application: ApplicationSettings,
     pub email_client: EmailClientSettings,
 }
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct ApplicationSettings {
     pub port: u16,
     pub host: String,
 }
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct DatabaseSettings {
     pub username: String,
     pub password: String,
@@ -23,7 +23,7 @@ pub struct DatabaseSettings {
     pub database_name: String,
 }
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct EmailClientSettings {
     pub base_url: String,
     pub sender_email: String,
